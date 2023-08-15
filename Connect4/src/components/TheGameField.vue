@@ -1,20 +1,37 @@
 <template>
   <div class="Game-Field">
-
-    <div class="Game-Field__tile" v-for="(tile, index) in game_field" :key="index">
-      <GameToken :token="tile" v-if="tile"/>
+    <GameToken :token="current_player" id="marker" ref="marker"/>
+    <div class="Game-Field__column" v-for="(column, index) in game_field" :key="index" :id="'col'+index">
+      <div class="Game-Field__column-tile" v-for="(tile, index) in column" :key="index" >
+        <GameToken :token="tile" v-if="tile"/>
+      </div>
+    </div>
+    <div class="time">
+      <span>{{current_player}}'s turn</span>
+      <span class="time_time">10s</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import GameToken from "@/components/GameToken.vue";
 
-const game_field = ref(new Array<undefined|Number>(7*6).fill(undefined))
-game_field.value[0]=1
-game_field.value[7]=1
-game_field.value[8]=1
+import {storeToRefs} from "pinia";
+import {computed} from "vue";
+import {useGameStatsStore} from "@/stores/gameStats";
+
+const store = useGameStatsStore()
+const {game_field, current_player} = storeToRefs(store)
+
+const currentPlayer = computed(() =>{
+  return current_player.value === 1 ? 'pink' : 'yellow'
+})
+const marker = ref(null)
+
+onMounted(() =>{
+  document.getElementById('col0').append(document.getElementById('marker'))
+})
 
 </script>
 

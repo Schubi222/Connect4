@@ -7,7 +7,6 @@
 
   const props = defineProps(['token'])
   const token_img_name = computed(() =>{
-    console.log()
     return props.token === 1 ? 'pink_token.svg' : 'yellow_token.svg'
   })
 </script>

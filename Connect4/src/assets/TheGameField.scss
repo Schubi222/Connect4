@@ -1,23 +1,55 @@
 @use "variables";
 .Game-Field{
   background: white;
-  width: 450px;
+  width: 480px;
   height: 420px;
   border: 1px solid black;
   border-radius: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  align-content: flex-start;
+  align-content: center;
   flex-flow: column wrap;
   gap: 10px;
   padding: 15px 15px 35px 15px;
-  &__tile{
-    width: 50px;
-    height: 50px;
-    background: variables.$violet;
-    border-radius: 100%;
-    box-shadow: inset  5px 5px 5px black;
-    border: 1px solid black;
+  position: relative;
+  &__column{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: relative;
+    &-tile{
+      width: 50px;
+      height: 50px;
+      background: variables.$violet;
+      border-radius: 100%;
+      box-shadow: inset  5px 5px 5px black;
+      border: 1px solid black;
+    }
+  }
+  #marker{
+    position: absolute;
+    z-index: 100;
+    top: -65px;
+  }
+  .time{
+    background: variables.$pink;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: -60px;
+    left: 190px;
+    border-radius: 50%;
+    *{font-weight: bold}
+    &_time{
+      font-size: 1.5rem;
+      text-transform: lowercase;
+
+    }
+
   }
 }

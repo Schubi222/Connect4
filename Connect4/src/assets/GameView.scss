@@ -21,3 +21,36 @@
     margin: 0 !important;
   }
 }
+.game{
+  display: flex;
+  align-items: center;
+  .player{
+    background: white;
+    border-radius: 20px;
+    border: 1px solid black;
+    box-shadow: 0 3px 0 3px black;
+    height: 120px;
+    width: 100px;
+    position: relative;
+    margin: 50px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    *{
+      font-weight: bold;
+    }
+    .score{
+      font-size: 2rem;
+    }
+    img{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: -15px;
+      left: 29px;
+
+    }
+  }
+}
