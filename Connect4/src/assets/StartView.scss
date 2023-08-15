@@ -1,0 +1,46 @@
+@use "CustomMixins";
+@use "variables";
+.Home{
+  width: 100vw;
+  height: 100%;
+  max-width: 350px;
+  max-height:800px;
+
+  padding: 25px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+  background:lighten(variables.$violet, 7%);
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 0 4px 0 4px black;
+
+}
+.pink_btn{
+  @include CustomMixins.button(variables.$pink);
+
+}
+.yellow_btn{
+  @include CustomMixins.button(variables.$yellow);
+}
+.white_btn{
+  @include CustomMixins.button(white);
+}
+.top-logo{
+  display: grid;
+  grid-template-columns: repeat(2,25px);
+  grid-gap: 10px;
+  margin: 0 auto 50px auto;
+  width: 60px;
+  img{
+    width: 25px;
+    border-radius: 100%;
+    border: 1px solid black;
+    box-shadow: 0 1px 0 2px black;
+    padding: 0;
+    margin: 0;
+  }
+}

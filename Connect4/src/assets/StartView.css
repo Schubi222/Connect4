@@ -1,0 +1,99 @@
+.Home {
+  width: 100vw;
+  height: 100%;
+  max-width: 350px;
+  max-height: 800px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  background: #9369ff;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 0 4px 0 4px black;
+}
+
+.pink_btn {
+  width: 100%;
+  height: 50px;
+  background: #fd6687;
+  box-shadow: 0 3px 1px 3px black;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pink_btn:hover {
+  background: rgba(253, 67, 107, 0.93);
+  box-shadow: 0 3px 1px 3px #1a1a1a;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.yellow_btn {
+  width: 100%;
+  height: 50px;
+  background: #ffce67;
+  box-shadow: 0 3px 1px 3px black;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.yellow_btn:hover {
+  background: rgba(255, 194, 67, 0.93);
+  box-shadow: 0 3px 1px 3px #1a1a1a;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.white_btn {
+  width: 100%;
+  height: 50px;
+  background: white;
+  box-shadow: 0 3px 1px 3px black;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.white_btn:hover {
+  background: rgba(237, 237, 237, 0.93);
+  box-shadow: 0 3px 1px 3px #1a1a1a;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.top-logo {
+  display: grid;
+  grid-template-columns: repeat(2, 25px);
+  grid-gap: 10px;
+  margin: 0 auto 50px auto;
+  width: 60px;
+}
+.top-logo img {
+  width: 25px;
+  border-radius: 100%;
+  border: 1px solid black;
+  box-shadow: 0 1px 0 2px black;
+  padding: 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=StartView.css.map */

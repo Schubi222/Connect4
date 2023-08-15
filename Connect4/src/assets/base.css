@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+  text-transform: uppercase;
 }
 
 body {
@@ -15,6 +16,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #7945ff;
 }
 
 #app {
@@ -26,6 +28,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 @media (min-width: 1024px) {
