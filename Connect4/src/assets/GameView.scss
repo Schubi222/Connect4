@@ -1,0 +1,23 @@
+@use "variables";
+.Top-Menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin: 100px 0;
+  .btn{
+    background: transparentize(black, .75);
+    padding: 7px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all .2s;
+    &:hover{
+      background: transparentize(black, .5);
+    }
+  }
+  .top-logo{
+    margin: 0 !important;
+  }
+}

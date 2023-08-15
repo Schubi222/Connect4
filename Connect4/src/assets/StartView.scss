@@ -21,7 +21,6 @@
 }
 .pink_btn{
   @include CustomMixins.button(variables.$pink);
-
 }
 .yellow_btn{
   @include CustomMixins.button(variables.$yellow);

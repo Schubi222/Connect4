@@ -1,0 +1,23 @@
+@use "variables";
+.Game-Field{
+  background: white;
+  width: 450px;
+  height: 420px;
+  border: 1px solid black;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-flow: column wrap;
+  gap: 10px;
+  padding: 15px 15px 35px 15px;
+  &__tile{
+    width: 50px;
+    height: 50px;
+    background: variables.$violet;
+    border-radius: 100%;
+    box-shadow: inset  5px 5px 5px black;
+    border: 1px solid black;
+  }
+}
