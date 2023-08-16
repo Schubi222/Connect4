@@ -1,0 +1,45 @@
+@use "variables";
+.Rules-Wrapper{
+  background: white;
+  border-radius: 25px;
+  width: 400px;
+  padding: 25px 25px 50px 25px;
+  word-break: break-word;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+  position: relative;
+  h1{
+    font-weight: bold;
+    font-size: 2.5rem;
+    align-self: center;
+  }
+  h2{
+    color: variables.$violet;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom:5px;
+  }
+  p,li{
+    text-transform: none;
+    line-height: 1.4;
+  }
+  ol{
+    padding-left:20px;
+  }
+  img{
+    position: absolute;
+    bottom: -40px;
+    left: 160px;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover{
+      width: 90px;
+      height: 90px;
+      bottom: -45px;
+      left: 155px;
+    }
+  }
+}
