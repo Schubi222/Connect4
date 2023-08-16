@@ -8,7 +8,7 @@
         <img src="@/assets/svg/yellow_token.svg" alt="">
         <img src="@/assets/svg/pink_token.svg" alt="">
       </div>
-      <div class="btn" @click="resetGameField">restart</div>
+      <div class="btn" @click="store.resetGameField">restart</div>
     </div>
     <div class="game">
       <div class="player">
@@ -38,11 +38,11 @@ import {storeToRefs} from "pinia";
 import {computed, onMounted} from "vue";
 
 const store = useGameStatsStore()
-const {player_1_wins, player_2_wins, cpu_active, resetGameField, reset} = storeToRefs(store)
+const {player_1_wins, player_2_wins, cpu_active,} = storeToRefs(store)
 
 
 onMounted(() =>{
-  reset
+  store.reset()
 })
 
 

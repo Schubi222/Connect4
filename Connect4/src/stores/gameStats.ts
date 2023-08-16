@@ -9,8 +9,10 @@ export const useGameStatsStore = defineStore('gameStats', () => {
   const cpu_active = ref(true)
 
   const game_field = ref(new Array(7))
-
   fillGameFieldArray()
+
+  const countDown = ref(30)
+
   function fillGameFieldArray(){
     game_field.value[0]=new Array(6)
     game_field.value[1]=new Array(6)
@@ -24,6 +26,11 @@ export const useGameStatsStore = defineStore('gameStats', () => {
   const nextPlayer = () =>{
     current_player.value = current_player.value === 1 ? 2 : 1
   }
+
+  const resetTimer = () =>{
+    countDown.value = 30
+  }
+
   const resetScore = () =>{
     player_1_wins.value = 0
     player_2_wins.value = 0
@@ -31,13 +38,15 @@ export const useGameStatsStore = defineStore('gameStats', () => {
 
   const resetGameField = () =>{
     fillGameFieldArray()
+    resetTimer()
   }
 
   const reset = () =>{
     resetScore()
     resetGameField()
+    resetTimer()
   }
 
-  return { player_1_wins, player_2_wins, cpu_active , game_field, current_player, nextPlayer, resetScore, resetGameField,
-          reset }
+  return { player_1_wins, player_2_wins, cpu_active , game_field, current_player, countDown, nextPlayer, resetScore, resetGameField,
+          reset, resetTimer }
 })
