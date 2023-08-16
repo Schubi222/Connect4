@@ -22,7 +22,7 @@ import {computed} from "vue";
 import {useGameStatsStore} from "@/stores/gameStats";
 
 const store = useGameStatsStore()
-const {game_field, current_player, countDown} = storeToRefs(store)
+const {game_field, current_player, countDown, cpu_active} = storeToRefs(store)
 
 const currentPlayer = computed(() =>{
   return current_player.value === 1 ? 'pink' : 'yellow'
@@ -55,12 +55,23 @@ function place(){
   game_field.value[marker_pos.value][pos] = current_player.value
   store.nextPlayer()
   countDown.value = 30
+  if (cpu_active && current_player.value === 2){setTimeout(computerMakesMove,1000)}
+}
+
+function computerMakesMove(){
+  let pos = -1
+  let col = -1
+  while(pos === -1){
+    col = Math.floor(Math.random() * 7)
+    pos = findLowestPosInColumn(game_field.value[col])
+  }
+  marker_pos.value = col
+  document.getElementById(`col${marker_pos.value}`).append(document.getElementById('marker'))
+  place()
 }
 
 function handleKeyDown(e){
-  console.log(e.keyCode)
   switch (e.keyCode){
-
     case 37:
       move(true)
       break
@@ -89,6 +100,7 @@ onMounted(() =>{
 
 onBeforeUnmount(() =>{
   window.removeEventListener('keydown',handleKeyDown)
+  clearInterval(interval)
 })
 
 </script>
