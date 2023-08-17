@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref} from "vue";
+import {onBeforeUnmount, onMounted, Ref, ref, UnwrapRef} from "vue";
 import GameToken from "@/components/GameToken.vue";
 
 import {storeToRefs} from "pinia";
@@ -22,13 +22,14 @@ import {computed} from "vue";
 import {useGameStatsStore} from "@/stores/gameStats";
 
 const store = useGameStatsStore()
-const {game_field, current_player, countDown, cpu_active} = storeToRefs(store)
+const {game_field, current_player, countDown, cpu_active, winner, game_stop, player_1_wins, player_2_wins} = storeToRefs(store)
 
 const currentPlayer = computed(() =>{
   return current_player.value === 1 ? 'pink' : 'yellow'
 })
 const marker = ref(null)
 const marker_pos = ref(0)
+
 
 function move(l:boolean){
   if (!marker_pos.value && l){return}
@@ -53,10 +54,15 @@ function place(){
   const pos = findLowestPosInColumn(game_field.value[marker_pos.value])
   if (pos === -1){return}
   game_field.value[marker_pos.value][pos] = current_player.value
-  console.log("PLACED AT:",marker_pos.value,pos)
+
   if (checkEndGame(marker_pos.value, pos)){return;}
   store.nextPlayer()
   countDown.value = 30
+
+  if (cpu_active.value && current_player.value === 2){setTimeout(computerMakesMove,1000)}
+}
+
+const checkForCPUFirstMove = () =>{
   if (cpu_active.value && current_player.value === 2){setTimeout(computerMakesMove,1000)}
 }
 
@@ -73,6 +79,7 @@ function computerMakesMove(){
 }
 
 function handleKeyDown(e){
+  if (game_stop.value || (cpu_active.value && current_player.value === 2)){return}
   switch (e.keyCode){
     case 37:
       move(true)
@@ -88,6 +95,7 @@ function handleKeyDown(e){
 
 let interval = setInterval(() => {
   if(countDown.value === 0){
+    if (game_stop.value){return}
     store.nextPlayer()
     countDown.value = 30
   }
@@ -100,13 +108,11 @@ let interval = setInterval(() => {
  * */
 function checkEndGame(col:number, pos:number):boolean{
   if (checkWin(col, pos)){
-    console.log(current_player.value, "WON")
     endGame(current_player.value)
     return true
   }
   if (checkDraw())
   {
-    console.log("DRAW")
     endGame(0)
     return true
   }
@@ -182,9 +188,11 @@ function checkDraw():boolean{
   return true
 }
 /** winner: 0 = draw 1/2 = player number that won */
-function endGame(winner:number){
-  console.log(winner)
-
+function endGame(winner_id:number){
+  winner.value = winner_id
+  if (winner.value === 1){player_1_wins.value++}
+  else if (winner.value === 2){player_2_wins.value++}
+  store.pauseGame()
 }
 
 onMounted(() =>{
@@ -195,8 +203,9 @@ onMounted(() =>{
 onBeforeUnmount(() =>{
   window.removeEventListener('keydown',handleKeyDown)
   clearInterval(interval)
+  checkForCPUFirstMove()
 })
-
+defineExpose({checkForCPUFirstMove})
 </script>
 
 <style scoped>
