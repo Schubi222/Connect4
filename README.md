@@ -1,4 +1,4 @@
-# violett
+# Connect4
 
 Technologies: TypeScript, SCSS, Vue, Pinia
 
