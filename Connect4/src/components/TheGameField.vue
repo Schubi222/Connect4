@@ -53,9 +53,11 @@ function place(){
   const pos = findLowestPosInColumn(game_field.value[marker_pos.value])
   if (pos === -1){return}
   game_field.value[marker_pos.value][pos] = current_player.value
+  console.log("PLACED AT:",marker_pos.value,pos)
+  if (checkEndGame(marker_pos.value, pos)){return;}
   store.nextPlayer()
   countDown.value = 30
-  if (cpu_active && current_player.value === 2){setTimeout(computerMakesMove,1000)}
+  if (cpu_active.value && current_player.value === 2){setTimeout(computerMakesMove,1000)}
 }
 
 function computerMakesMove(){
@@ -92,6 +94,98 @@ let interval = setInterval(() => {
   countDown.value--;
 }, 1000)
 
+/**
+ * @param col col of the placed stone
+ * @param pos in the col
+ * */
+function checkEndGame(col:number, pos:number):boolean{
+  if (checkWin(col, pos)){
+    console.log(current_player.value, "WON")
+    endGame(current_player.value)
+    return true
+  }
+  if (checkDraw())
+  {
+    console.log("DRAW")
+    endGame(0)
+    return true
+  }
+  return false
+}
+/**
+ * @param col col of the placed stone
+ * @param pos in the col
+ * */
+function checkWin(col:number, pos:number):boolean{
+  let connected = 1
+  const space_left = col > 3 ? 3 : col
+  const space_right =  6-col > 3 ? 3 : 6-col
+  const space_top = pos > 3 ? 3 : pos
+  const space_bottom = 5-pos > 3 ? 3 : 5-pos
+
+  for (let i = col-space_left; i < col; i++) {
+    if (game_field.value[i][pos] !== current_player.value){
+      connected = 1
+      continue
+    }
+    connected++
+    if (connected === 4) {return true}
+  }
+
+  for (let i = col+1; i <= col+space_right; i++) {
+    if (game_field.value[i][pos] !== current_player.value){
+      break
+    }
+    connected++
+    if (connected === 4) {return true}
+  }
+
+  connected = 1
+  for (let i = pos+1; i <= pos+space_bottom; i++) {
+    if (game_field.value[col][i] !== current_player.value){
+      break
+    }
+    connected++
+    if (connected === 4) {return true}
+  }
+
+  connected = 1
+  const smaller_down = space_left < space_bottom ? space_left : space_bottom
+
+  for (let i = 0; i < smaller_down; i++) {
+    if (game_field.value[col-smaller_down+i][pos+smaller_down-i] !== current_player.value){
+      connected = 1
+      continue
+    }
+    connected++
+    if(connected === 4){return  true}
+  }
+
+  const smaller_up = space_right < space_top ? space_right : space_top
+
+  for (let i = 1; i < smaller_up; i++) {
+    if (game_field.value[col+i][pos-i] !== current_player.value){
+      break
+    }
+    connected++
+    if(connected === 4){return  true}
+  }
+
+  return false
+}
+function checkDraw():boolean{
+  for (let i = 0; i < 7; i++) {
+    if (findLowestPosInColumn(game_field.value[i]) !== -1){
+      return false
+    }
+  }
+  return true
+}
+/** winner: 0 = draw 1/2 = player number that won */
+function endGame(winner:number){
+  console.log(winner)
+
+}
 
 onMounted(() =>{
   document.getElementById('col0').append(document.getElementById('marker'))
