@@ -16,5 +16,6 @@ Animation: 30min
 
 Total: 6h 30min
 
+Time spent:
 
 7h without animation (would require the game field as a graphic), responsiveness and usability for mobile. But includes the timer.
