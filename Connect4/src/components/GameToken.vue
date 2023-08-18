@@ -12,5 +12,11 @@
 </script>
 
 <style scoped>
+@media (max-width: 500px) {
+  img{
+    width: calc((80vw - 50px - (6 * 5px))/6) ;
+    height:  calc((80vw - 50px - (6 * 5px))/6);
+  }
+}
 
 </style>

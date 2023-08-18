@@ -1,7 +1,13 @@
 <template>
   <div class="Game-Field" >
     <GameToken :token="current_player" id="marker" ref="marker"/>
-    <div class="Game-Field__column" v-for="(column, index) in game_field" :key="index" :id="'col'+index">
+    <div
+        class="Game-Field__column"
+        v-for="(column, index) in game_field"
+        :key="index"
+        :id="'col'+index"
+        @click="clicked_col"
+    >
       <div class="Game-Field__column-tile" v-for="(tile, index) in column" :key="index" >
         <GameToken :token="tile" v-if="tile"/>
       </div>
@@ -14,21 +20,40 @@
 </template>
 
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, Ref, ref, UnwrapRef} from "vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
 import GameToken from "@/components/GameToken.vue";
 
 import {storeToRefs} from "pinia";
-import {computed} from "vue";
+
 import {useGameStatsStore} from "@/stores/gameStats";
 
 const store = useGameStatsStore()
 const {game_field, current_player, countDown, cpu_active, winner, game_stop, player_1_wins, player_2_wins} = storeToRefs(store)
 
-const currentPlayer = computed(() =>{
+/*const currentPlayer = computed(() =>{
   return current_player.value === 1 ? 'pink' : 'yellow'
-})
+})*/
 const marker = ref(null)
 const marker_pos = ref(0)
+
+
+const clicked_col = (e:any) =>{
+  if (cpu_active.value && current_player.value === 2){return}
+  const target = e.target.parentElement.id ? e.target.parentElement : e.target
+  target.style.background = "lightblue"
+  target.append(document.getElementById('marker'))
+  marker_pos.value = Number(target.id.slice(-1))
+
+  setTimeout(() =>{
+    place()
+  },200)
+
+  setTimeout(()=>{
+    target.style.background = "none"
+  },200
+  )
+}
+
 
 
 function move(l:boolean){
@@ -78,7 +103,7 @@ function computerMakesMove(){
   place()
 }
 
-function handleKeyDown(e){
+function handleKeyDown(e:any){
   if (game_stop.value || (cpu_active.value && current_player.value === 2)){return}
   switch (e.keyCode){
     case 37:
