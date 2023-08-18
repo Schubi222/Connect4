@@ -17,6 +17,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #7945ff;
+  display: flex;
+  place-items: center;
+  width: 100%;
 }
 
 #app {
@@ -24,6 +27,8 @@ body {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+  display: flex;
+  place-items: flex-start;
 }
 
 a {
@@ -31,13 +36,9 @@ a {
   color: black;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+@media (max-width: 1000px) {
   #app {
-    padding: 0 2rem;
+    padding: 0.5rem;
   }
 }
 

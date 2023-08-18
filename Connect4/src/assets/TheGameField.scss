@@ -1,4 +1,5 @@
 @use "variables";
+
 .Game-Field{
   background: white;
   width: 480px;
@@ -48,6 +49,33 @@
     &_time{
       font-size: 1.5rem;
       text-transform: lowercase;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .Game-Field{
+    width: 100%;
+    max-width: 100vw;
+    max-height: 420px;
+    height: calc(110% + 100px);
+    &__column{
+      gap: 5px;
+      &-tile{
+        width: calc((80vw - 50px - (6 * 5px))/6) ;
+        height:  calc((80vw - 50px - (6 * 5px))/6);
+
+      }
+    }
+    .time{
+      left: 37%;
+      width: 90px;
+      height: 90px;
+    }
+    #marker{
+        width: calc((80vw - 50px - (6 * 5px))/6) ;
+        height:  calc((80vw - 50px - (6 * 5px))/6);
+      top:-22%
     }
   }
 }

@@ -2,13 +2,15 @@
 .Rules-Wrapper{
   background: white;
   border-radius: 25px;
-  width: 400px;
+  width: 90vw;
+  max-width: 400px;
   padding: 25px 25px 50px 25px;
   word-break: break-word;
   display: flex;
   flex-flow: column wrap;
   gap: 10px;
   position: relative;
+  container-type: inline-size;
   h1{
     font-weight: bold;
     font-size: 2.5rem;
@@ -30,7 +32,7 @@
   img{
     position: absolute;
     bottom: -40px;
-    left: 160px;
+    left: 45cqw;
     width: 80px;
     height: 80px;
     cursor: pointer;
@@ -40,6 +42,14 @@
       height: 90px;
       bottom: -45px;
       left: 155px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .Rules-Wrapper{
+    padding: 15px 15px 50px 15px;
+    img{
+      left: 40cqw;
     }
   }
 }
